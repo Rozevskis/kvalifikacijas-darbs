@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Playlsit;
+use App\Models\Playlists;
 use Illuminate\Http\Request;
 
 class PlaylsitController extends Controller
@@ -26,7 +26,7 @@ class PlaylsitController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Playlsit $playlsit)
+    public function show(Playlists $playlsit)
     {
         //
     }
@@ -34,7 +34,7 @@ class PlaylsitController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Playlsit $playlsit)
+    public function update(Request $request, Playlists $playlsit)
     {
         //
     }
@@ -42,7 +42,7 @@ class PlaylsitController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Playlsit $playlsit)
+    public function destroy(Playlists $playlsit)
     {
         //
     }
