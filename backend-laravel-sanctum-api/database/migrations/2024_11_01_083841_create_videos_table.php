@@ -9,6 +9,7 @@ return new class extends Migration {
     {
         Schema::create('videos', function (Blueprint $table) {
             $table->uuid('id')->primary(); // Use UUID as the primary key
+            $table->foreignUuid('user_id')->constrained('users');
             $table->string('title');
             $table->text('description')->nullable();
             $table->string('url');

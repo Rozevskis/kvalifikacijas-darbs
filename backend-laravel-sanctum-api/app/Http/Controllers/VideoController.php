@@ -12,18 +12,17 @@ class VideoController extends Controller implements HasMiddleware
     public static function middleware()
     {
         return [
-            new Middleware('auth:sanctum', except: []),
+            new Middleware('auth:sanctum', except: ['index', 'show']),
         ];
     }
     public function index()
     {
-        $videos = Video::with('user')->get(); // Fetch videos with associated user data
+        $videos = Video::with('user')->get();
         return response()->json($videos);
     }
 
     public function store(Request $request)
     {
-        // Validate incoming request data
         $fields = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
@@ -33,28 +32,38 @@ class VideoController extends Controller implements HasMiddleware
 
         $video = $request->user()->videos()->create($fields);
 
-        return response()->json($video, 201); 
+        return response()->json($video, 201);
     }
 
 
     public function show(Video $video)
     {
-        //
+        return response()->json($video->load('user'));
     }
 
     public function update(Request $request, Video $video)
     {
-        //
+        if ($request->user()->id !== $video->user_id) {
+            return response()->json(['error' => 'Unauthorized'], 403);
+        }
+        $fields = $request->validate([
+            'title' => 'sometimes|required|string|max:255',
+            'description' => 'sometimes|nullable|string',
+            'url' => 'sometimes|required',
+        ]);
+
+        $video->update($fields);
+
+        return response()->json($video);
     }
 
-        // Update the video
-        $video->update($request->only(['title', 'description', 'url']));
-
-        return response()->json($video); 
-    }
-
-    public function destroy(Video $video)
+    public function destroy(Request $request, Video $video)
     {
-        //
+        if ($request->user()->id !== $video->user_id) {
+            return response()->json(['error' => 'Unauthorized'], 403);
+        }
+        $video->delete();
+
+        return response()->json(null, 204);
     }
 }
