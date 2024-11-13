@@ -9,6 +9,10 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
+Route::get('/test', function () {
+    return response()->json(['message' => 'API is connected and working!']);
+});
+
 Route::apiResource('videos', VideoController::class);
 
 
