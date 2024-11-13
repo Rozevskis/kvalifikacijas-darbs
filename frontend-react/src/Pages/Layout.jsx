@@ -1,36 +1,46 @@
 import { useContext } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Navigate, Outlet, useNavigate } from "react-router-dom";
 import { AppContext } from "../Context/AppContext";
 
 export default function Layout() {
-  const { user } = useContext(AppContext);
+  const { user, token, setUser, setToken } = useContext(AppContext);
+  const navigate = useNavigate();
 
+  async function handleLogout(e) {
+    e.preventDefault();
+    const res = await fetch("/api/logout", {
+      method: "post",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (res.ok) {
+      setToken(null);
+      setUser(null);
+      localStorage.removeItem("token");
+      Navigate("/");
+    }
+  }
   return (
     <>
       <header>
         <nav>
-          <Link
-            to="/"
-            className=" text-white py-2 px-4 rounded focus:outline-none "
-          >
+          <Link to="/" className=" text-white py-2 px-4 ">
             Home
           </Link>
           {user ? (
-            <div>
-              <p className="text-white">Hello {user.name}</p>
+            <div className="space-x-4 flex items-center">
+              <p className="text-white py-2 px-4">Hello {user.name}</p>
+              <form onSubmit={handleLogout}>
+                <button className="text-white py-2 px-4 ">Logout</button>
+              </form>
             </div>
           ) : (
             <div className="space-x-4">
-              <Link
-                to="/register"
-                className=" text-white py-2 px-4 rounded focus:outline-none "
-              >
+              <Link to="/register" className=" text-white py-2 px-4 ">
                 Register
               </Link>
-              <Link
-                to="/login"
-                className=" text-white py-2 px-4 rounded focus:outline-none "
-              >
+              <Link to="/login" className=" text-white py-2 px-4 ">
                 Login
               </Link>
             </div>
