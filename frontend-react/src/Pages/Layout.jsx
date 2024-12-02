@@ -1,10 +1,9 @@
 import { useContext } from "react";
-import { Link, Navigate, Outlet, useNavigate } from "react-router-dom";
+import { Link, Navigate, Outlet } from "react-router-dom";
 import { AppContext } from "../Context/AppContext";
 
 export default function Layout() {
   const { user, token, setUser, setToken } = useContext(AppContext);
-  const navigate = useNavigate();
 
   async function handleLogout(e) {
     e.preventDefault();
@@ -29,13 +28,18 @@ export default function Layout() {
             Home
           </Link>
           {user ? (
+            // Authenticated
             <div className="space-x-4 flex items-center">
               <p className="text-white py-2 px-4">Hello {user.name}</p>
+              <Link to="/create" className=" text-white py-2 px-4 ">
+                Uplaod a video
+              </Link>
               <form onSubmit={handleLogout}>
                 <button className="text-white py-2 px-4 ">Logout</button>
               </form>
             </div>
           ) : (
+            // Guest
             <div className="space-x-4">
               <Link to="/register" className=" text-white py-2 px-4 ">
                 Register
