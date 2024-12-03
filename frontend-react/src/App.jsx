@@ -6,7 +6,8 @@ import Register from "./Pages/Auth/Register";
 import Login from "./Pages/Auth/Login";
 import { useContext } from "react";
 import { AppContext } from "./Context/AppContext";
-import Create from "./Pages/Posts/Create";
+import Create from "./Pages/Videos/Create";
+import Show from "./Pages/Videos/Show";
 
 export default function App() {
   const { user } = useContext(AppContext);
@@ -21,6 +22,9 @@ export default function App() {
 
           {/* Authenticated */}
           <Route path="/create" element={user ? <Create /> : <Login />} />
+
+          {/* Video */}
+          <Route path="/videos/:id" element={<Show />} />
         </Route>
       </Routes>
     </BrowserRouter>
