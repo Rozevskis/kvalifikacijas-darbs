@@ -17,7 +17,7 @@ class VideoController extends Controller implements HasMiddleware
     }
     public function index()
     {
-        $videos = Video::with('user')->get();
+        $videos = Video::with('user')->latest()->get();
         return response()->json($videos);
     }
 
