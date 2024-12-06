@@ -6,13 +6,14 @@ use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\File;
 
 class VideoController extends Controller implements HasMiddleware
 {
     public static function middleware()
     {
         return [
-            new Middleware('auth:sanctum', except: ['index', 'show']),
+            new Middleware('auth:sanctum', except: ['index', 'show', 'uploadVideo']),
         ];
     }
     public function index()
@@ -27,7 +28,7 @@ class VideoController extends Controller implements HasMiddleware
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             // 'url' => 'required|url',
-            'url' => 'required',
+            'url' => '',
         ]);
 
         $video = $request->user()->videos()->create($fields);
@@ -65,5 +66,24 @@ class VideoController extends Controller implements HasMiddleware
         $video->delete();
 
         return response()->json(null, 204);
+    }
+    public function uploadVideo(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|file|mimes:mp4,avi,mkv|max:20480',
+        ]);
+
+        $file = $request->file('file');
+
+        $destinationPath = base_path('../frontend-react/public/videos');
+        if (!File::exists($destinationPath)) {
+            File::makeDirectory($destinationPath, 0777, true, true);
+        }
+
+        $filename = $file->getClientOriginalName();
+        $file->move($destinationPath, $filename);
+
+        $publicUrl = $filename;
+        return response()->json(['url' => $publicUrl], 200);
     }
 }
