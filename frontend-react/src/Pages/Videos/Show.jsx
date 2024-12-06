@@ -23,7 +23,7 @@ export default function Show() {
         <div className="w-4/5 mx-auto m-4">
           <div className="flex flex-col gap-4">
             <div className="w-full h-2/3 overflow-hidden">
-              <VideoPlayer videoSrc="/videos/SampleVideo.mp4" />
+              <VideoPlayer videoSrc={video.url} />
             </div>
             <div className="flex flex-col gap-2 m-4">
               <p className="text-xl font-bold">{video.title}</p>
