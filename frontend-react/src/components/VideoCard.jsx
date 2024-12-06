@@ -6,7 +6,7 @@ export default function VideoCard({ video }) {
     <Link to={`/videos/${video.id}`}>
       <div
         key={video.id}
-        className="m-2 flex flex-col items-start justify-between w-[300px] h-[250px]"
+        className="m-2 flex flex-col items-start justify-between w-[300px] h-[250px] video-card"
       >
         <div className="w-full h-2/3 overflow-hidden">
           <VideoThumbnail videoUrl={video.url} />

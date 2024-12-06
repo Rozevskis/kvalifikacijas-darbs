@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { VideoPlayer } from "./VideoPlayer";
 
 const VideoThumbnail = ({ videoUrl }) => {
   const [thumbnail, setThumbnail] = useState(null);
@@ -34,7 +35,10 @@ const VideoThumbnail = ({ videoUrl }) => {
   }, [videoUrl]);
 
   return (
-    <div>
+    <div className="thumbnail">
+      <div className="video-compact-container hidden">
+        <VideoPlayer videoSrc={videoUrl} />
+      </div>
       <video ref={videoRef} src={videoUrl} style={{ display: "none" }} />
       <canvas
         ref={canvasRef}
@@ -46,5 +50,4 @@ const VideoThumbnail = ({ videoUrl }) => {
     </div>
   );
 };
-
 export default VideoThumbnail;
