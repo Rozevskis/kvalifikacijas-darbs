@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { VideoPlayer } from "../../components/VideoPlayer";
 
 export default function Show() {
   const { id } = useParams();
@@ -22,7 +23,7 @@ export default function Show() {
         <div className="w-4/5 mx-auto m-4">
           <div className="flex flex-col gap-4">
             <div className="w-full h-2/3 overflow-hidden">
-              <img src="https://picsum.photos/1600/900" />
+              <VideoPlayer videoSrc="/videos/SampleVideo.mp4" />
             </div>
             <div className="flex flex-col gap-2 m-4">
               <p className="text-xl font-bold">{video.title}</p>
