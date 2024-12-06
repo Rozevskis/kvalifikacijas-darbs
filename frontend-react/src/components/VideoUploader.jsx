@@ -48,7 +48,7 @@ const VideoUploader = ({ onUploadComplete }) => {
       const videoUrl = response.data.url;
       setUploadedVideoUrl(videoUrl);
       setFilePreview(videoUrl); // Show the uploaded video
-      onUploadComplete?.(videoUrl); // Notify parent component if needed
+      onUploadComplete(videoUrl); // Pass the URL back to the parent component
     } catch (error) {
       console.error("Upload failed:", error);
       setErrorMessage("Failed to upload video. Please try again.");

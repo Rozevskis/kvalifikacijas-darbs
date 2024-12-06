@@ -32,13 +32,16 @@ export default function Create() {
       navigate("/");
     }
   }
+  const handleVideoUploadComplete = (videoUrl) => {
+    setFormData({ ...formData, url: videoUrl });
+  };
 
   return (
     <>
       <h1 className="title">Upload a new video</h1>
       <form onSubmit={handleCreate} className="w-1/2 mx-auto space-y-6">
         <div>
-          <VideoUploader />
+          <VideoUploader onUploadComplete={handleVideoUploadComplete} />
         </div>
         <div>
           <input
