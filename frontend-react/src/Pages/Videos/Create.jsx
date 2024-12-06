@@ -8,15 +8,15 @@ export default function Create() {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    url: "/static-url",
+    url: "",
   });
+  const [errors, setErrors] = useState({});
 
-  const [errors, setErorrs] = useState({});
   async function handleCreate(e) {
     e.preventDefault();
 
     const res = await fetch("/api/videos", {
-      method: "post",
+      method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -26,7 +26,7 @@ export default function Create() {
     const data = await res.json();
 
     if (data.errors) {
-      setErorrs(data.errors);
+      setErrors(data.errors);
     } else {
       navigate("/");
     }
