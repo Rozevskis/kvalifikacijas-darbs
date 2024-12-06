@@ -3,7 +3,7 @@ import VideoThumbnail from "./VideoThumbnail";
 
 export default function VideoCard({ video }) {
   return (
-    <a href="">
+    <Link to={`/videos/${video.id}`}>
       <div
         key={video.id}
         className="m-2 flex flex-col items-start justify-between w-[300px] h-[250px]"
@@ -18,9 +18,8 @@ export default function VideoCard({ video }) {
             <small className="font-semibold">{video.user.name}</small>
             <small>{new Date(video.created_at).toLocaleString()}</small>
           </div>
-          <Link to={`/videos/${video.id}`}>Watch</Link>
         </div>
       </div>
-    </a>
+    </Link>
   );
 }
