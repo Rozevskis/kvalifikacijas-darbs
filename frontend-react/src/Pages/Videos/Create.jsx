@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { AppContext } from "../../Context/AppContext";
 import { useNavigate } from "react-router-dom";
+import VideoUploader from "../../components/VideoUploader";
 
 export default function Create() {
   const navigate = useNavigate();
@@ -37,6 +38,9 @@ export default function Create() {
       <h1 className="title">Upload a new video</h1>
       <form onSubmit={handleCreate} className="w-1/2 mx-auto space-y-6">
         <div>
+          <VideoUploader />
+        </div>
+        <div>
           <input
             type="text"
             placeholder="Video title"
@@ -55,7 +59,9 @@ export default function Create() {
               setFormData({ ...formData, description: e.target.value })
             }
           />
-          {errors.description && <p className="text-red-500">{errors.description}</p>}
+          {errors.description && (
+            <p className="text-red-500">{errors.description}</p>
+          )}
         </div>
         <button className="primary-btn">Post</button>
       </form>

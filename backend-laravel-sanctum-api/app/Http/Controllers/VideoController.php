@@ -83,7 +83,7 @@ class VideoController extends Controller implements HasMiddleware
         $filename = $file->getClientOriginalName();
         $file->move($destinationPath, $filename);
 
-        $publicUrl = $filename;
+        $publicUrl = "/videos/{$filename}";
         return response()->json(['url' => $publicUrl], 200);
     }
 }
