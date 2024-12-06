@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 # Videos
-videos/
+public/videos/
