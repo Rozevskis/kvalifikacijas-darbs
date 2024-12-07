@@ -70,7 +70,7 @@ class VideoController extends Controller implements HasMiddleware
     public function uploadVideo(Request $request)
     {
         $request->validate([
-            'file' => 'required|file|mimes:mp4,avi,mkv|max:20480',
+            'file' => 'required|file|mimes:mp4,avi,mkv|max:204800',
         ]);
 
         $file = $request->file('file');

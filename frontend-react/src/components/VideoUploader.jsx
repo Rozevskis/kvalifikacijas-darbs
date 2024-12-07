@@ -83,8 +83,9 @@ const VideoUploader = ({ onUploadComplete }) => {
         {filePreview ? (
           <VideoPlayer videoSrc={uploadedVideoUrl || filePreview} />
         ) : (
-          <div id="start">
+          <div id="start ">
             <i className="fa fa-download" aria-hidden="true"></i>
+            <p className="text-blue-300 text-sm">~ 200MB max</p>
             <div>Select a file or drag here</div>
             {errorMessage && <div id="notimage">{errorMessage}</div>}
             {uploading ? (
