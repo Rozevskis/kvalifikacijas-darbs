@@ -31,8 +31,12 @@ export default function Layout() {
             // Authenticated
             <div className="space-x-4 flex items-center">
               <p className="text-white py-2 px-4">Hello {user.name}</p>
-              <Link to="/create" className=" text-white py-2 px-4 ">
-                Uplaod a video
+              <Link
+                to="/create"
+                className=" text-white py-2 px-4 flex flex-col items-center mb-[-20px]"
+              >
+                Uplaod
+                <i className="fa fa-download" aria-hidden="true"></i>
               </Link>
               <form onSubmit={handleLogout}>
                 <button className="text-white py-2 px-4 ">Logout</button>

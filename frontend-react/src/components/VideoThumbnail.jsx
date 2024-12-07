@@ -37,16 +37,17 @@ const VideoThumbnail = ({ videoUrl }) => {
   return (
     <div className="thumbnail">
       <div className="video-compact-container hidden">
-        <VideoPlayer videoSrc={videoUrl} />
+        <video ref={videoRef} src={videoUrl} autoPlay loop muted />
       </div>
-      <video ref={videoRef} src={videoUrl} style={{ display: "none" }} />
       <canvas
         ref={canvasRef}
         width="320"
         height="180"
         style={{ display: "none" }}
       />
-      {thumbnail && <img src={thumbnail} alt="Video Thumbnail" />}
+      {thumbnail && (
+        <img className="rounded-lg" src={thumbnail} alt="Video Thumbnail" />
+      )}
     </div>
   );
 };
