@@ -33,7 +33,8 @@ label.hover {
 }
 
 #start {
-  display: block;
+  display: flex;
+  flex-direction: column;
 }
 
 #start i {
