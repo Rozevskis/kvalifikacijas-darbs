@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import VideoCard from "../components/VideoCard";
+import VideoCard from "../VideoCard";
 
 const VideoList = () => {
   const [videos, setVideos] = useState([]);
