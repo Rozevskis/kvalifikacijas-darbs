@@ -29,10 +29,10 @@
     @apply bg-slate-800 shadow-md;
   }
   nav {
-    @apply p-5 max-w-screen-lg mx-auto flex items-center justify-between;
+    @apply p-5  mx-auto flex items-center justify-between;
   }
   main {
-    @apply max-w-screen-lg mx-auto;
+    @apply mx-auto;
   }
   .primary-btn {
     @apply flex w-full justify-center rounded-md bg-blue-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:bg-slate-400 disabled:cursor-wait;
@@ -80,17 +80,20 @@
 .video-card:hover .video-compact-container {
   display: block;
 }
-.thumbnail, .video-card{
+.thumbnail,
+.video-card {
   transition: transform 0.3s ease;
 }
 .video-card:hover .thumbnail {
   transform: scale(1.05);
 }
 .video-card:hover {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
   transform: scale(1.05);
 }
 .video-card:active {
-  box-shadow: inset 0 10px 15px -3px rgba(0, 0, 0, 0.1), inset 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    inset 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   transform: scale(0.95);
 }
