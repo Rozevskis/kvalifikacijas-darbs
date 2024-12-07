@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import VideoThumbnail from "./VideoThumbnail";
+import TimeAgo from "./timeAgo";
 
 export default function VideoCard({ video }) {
   return (
@@ -13,10 +14,9 @@ export default function VideoCard({ video }) {
         </div>
         <div className="p-2 h-1/3 w-full flex flex-col">
           <h2 className="font-bold">{video.title}</h2>
-          <small>{video.url}</small>
-          <div className="flex justify-end w-full gap-3">
+          <div className="flex items-end w-full justify-between">
             <small className="font-semibold">{video.user.name}</small>
-            <small>{new Date(video.created_at).toLocaleString()}</small>
+            <TimeAgo createdAt={video.created_at} />
           </div>
         </div>
       </div>
