@@ -19,7 +19,7 @@ const VideoList = () => {
   return (
     <div className="flex flex-row m-6 flex-wrap">
       {videos.length > 0 ? (
-        videos.map((video) => <VideoCard key={video.id} video={video} />) // Use the VideoCard component for each video
+        videos.map((video) => <VideoCard key={video.id} video={video} />)
       ) : (
         <p>No Videos found</p>
       )}

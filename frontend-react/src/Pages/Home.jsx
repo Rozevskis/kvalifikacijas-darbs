@@ -1,4 +1,4 @@
-import VideoList from "../components/Blocks/VideoList"; // Assuming it's in the components folder
+import VideoList from "../components/Blocks/VideoList";
 
 export default function Home() {
   return <VideoList />;
