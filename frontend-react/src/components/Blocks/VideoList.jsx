@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import VideoCard from "../VideoCard";
 
-const VideoList = () => {
+const VideoList = ({ currentVideoUrl }) => {
   const [videos, setVideos] = useState([]);
 
   async function getVideos() {
@@ -17,9 +17,15 @@ const VideoList = () => {
   }, []);
 
   return (
-    <div className="flex flex-row m-6 flex-wrap">
+    <div className="flex flex-row m-6 flex-wrap justify-center">
       {videos.length > 0 ? (
-        videos.map((video) => <VideoCard key={video.id} video={video} />)
+        videos.map((video) => {
+          // Check if video.url is not equal to currentVideoUrl
+          if (video.url !== currentVideoUrl) {
+            return <VideoCard key={video.id} video={video} />;
+          }
+          return null; // Skip rendering the VideoCard if urls are the same
+        })
       ) : (
         <p>No Videos found</p>
       )}
