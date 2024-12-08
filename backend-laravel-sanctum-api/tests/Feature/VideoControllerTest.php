@@ -54,4 +54,20 @@ class VideoControllerTest extends TestCase
             'user_id' => $user->id,
         ]);
     }
+    public function test_can_show_video()
+    {
+        $video = Video::factory()->create(); // Create a video
+        $response = $this->getJson("/api/videos/{$video->id}");
+
+        $response->assertStatus(200);
+        $response->assertJson([
+            'id' => $video->id,
+            'title' => $video->title,
+            'description' => $video->description,
+            'url' => $video->url,
+            'user_id' => $video->user_id,
+        ]);
+    }
+
+
 }
