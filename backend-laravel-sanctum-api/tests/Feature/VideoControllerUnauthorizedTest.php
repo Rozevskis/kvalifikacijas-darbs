@@ -19,7 +19,7 @@ class VideoControllerUnauthorizedTest extends TestCase
         $newData = [
             'title' => 'Updated Test Video',
             'description' => 'Updated description.',
-            'url' => 'http://test.com/updated_video.mp4',
+            'url' => 'videos/updated_video.mp4',
         ];
 
         $response = $this->actingAs($user2, 'sanctum')->putJson("/api/videos/{$video->id}", $newData);

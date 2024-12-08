@@ -41,7 +41,7 @@ class VideoControllerTest extends TestCase
         $data = [
             'title' => 'Test Video',
             'description' => 'This is a test description.',
-            'url' => 'http://test.com/video.mp4',
+            'url' => 'videos/video.mp4',
         ];
 
         $response = $this->actingAs($user, 'sanctum')->postJson('/api/videos', $data);
@@ -50,7 +50,7 @@ class VideoControllerTest extends TestCase
         $response->assertJson([
             'title' => 'Test Video',
             'description' => 'This is a test description.',
-            'url' => 'http://test.com/video.mp4',
+            'url' => 'videos/video.mp4',
             'user_id' => $user->id,
         ]);
     }
@@ -77,7 +77,7 @@ class VideoControllerTest extends TestCase
         $newData = [
             'title' => 'Updated Test Video',
             'description' => 'Updated description.',
-            'url' => 'http://test.com/updated_video.mp4',
+            'url' => 'videos/updated_video.mp4',
         ];
 
         $response = $this->actingAs($user, 'sanctum')->putJson("/api/videos/{$video->id}", $newData);
@@ -87,7 +87,7 @@ class VideoControllerTest extends TestCase
             'id' => $video->id,
             'title' => 'Updated Test Video',
             'description' => 'Updated description.',
-            'url' => 'http://test.com/updated_video.mp4',
+            'url' => 'videos/updated_video.mp4',
         ]);
     }
     public function test_can_delete_video()
