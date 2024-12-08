@@ -2,22 +2,21 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
+use App\Models\Video;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Video>
- */
 class VideoFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition(): array
+    protected $model = Video::class;
+
+    public function definition()
     {
         return [
-            //
+            'title' => $this->faker->sentence, // Fake video title
+            'description' => $this->faker->paragraph, // Fake description
+            'url' => $this->faker->url, // Fake video URL
+            'user_id' => User::factory(), // Creates and associates a user
         ];
     }
 }
