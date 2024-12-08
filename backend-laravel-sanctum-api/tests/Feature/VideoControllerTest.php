@@ -69,5 +69,27 @@ class VideoControllerTest extends TestCase
         ]);
     }
 
+    public function test_can_update_video()
+    {
+        $user = User::factory()->create(); // Create a user
+        $video = Video::factory()->create(['user_id' => $user->id]); // Create a video for this user
+
+        $newData = [
+            'title' => 'Updated Test Video',
+            'description' => 'Updated description.',
+            'url' => 'http://test.com/updated_video.mp4',
+        ];
+
+        $response = $this->actingAs($user, 'sanctum')->putJson("/api/videos/{$video->id}", $newData);
+
+        $response->assertStatus(200);
+        $response->assertJson([
+            'id' => $video->id,
+            'title' => 'Updated Test Video',
+            'description' => 'Updated description.',
+            'url' => 'http://test.com/updated_video.mp4',
+        ]);
+    }
+
 
 }
