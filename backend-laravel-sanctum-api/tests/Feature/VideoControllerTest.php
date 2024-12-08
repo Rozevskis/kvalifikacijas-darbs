@@ -90,6 +90,14 @@ class VideoControllerTest extends TestCase
             'url' => 'http://test.com/updated_video.mp4',
         ]);
     }
+    public function test_can_delete_video()
+    {
+        $user = User::factory()->create(); // Create a user
+        $video = Video::factory()->create(['user_id' => $user->id]); // Create a video for this user
 
+        $response = $this->actingAs($user, 'sanctum')->deleteJson("/api/videos/{$video->id}");
 
+        $response->assertStatus(204); // No content status code after deletion
+        $this->assertDatabaseMissing('videos', ['id' => $video->id]); // Ensure the video is deleted from the database
+    }
 }
