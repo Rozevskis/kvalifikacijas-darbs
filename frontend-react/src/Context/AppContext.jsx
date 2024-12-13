@@ -13,7 +13,7 @@ export default function AppProvider({ children }) {
       },
     });
     const data = await res.json();
-    setUser(data);
+    res.ok ? setUser(data) : setUser();
   }
   useEffect(() => {
     if (token) {
