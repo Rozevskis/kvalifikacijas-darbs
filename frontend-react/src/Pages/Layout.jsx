@@ -24,7 +24,7 @@ export default function Layout() {
     <>
       <header>
         <nav>
-          <Link to="/" className=" text-white py-2 px-4 ">
+          <Link to="/" className=" text-white py-2 px-4 font-semibold ">
             Home
           </Link>
           {user ? (

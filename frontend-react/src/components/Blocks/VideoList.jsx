@@ -17,7 +17,7 @@ const VideoList = ({ currentVideoUrl }) => {
   }, []);
 
   return (
-    <div className="flex flex-row m-6 flex-wrap justify-center">
+    <div className="flex flex-row w-full m-6 flex-wrap justify-start">
       {videos.length > 0 ? (
         videos.map((video) => {
           // Check if video.url is not equal to currentVideoUrl
