@@ -4,13 +4,13 @@ import TimeAgo from "./timeAgo";
 
 export default function VideoCard({ video }) {
   return (
-    <div className="h-fit">
+    <div className="max-h-min w-[25%] min-w-[300px]">
       <Link to={`/videos/${video.id}`}>
         <div
           key={video.id}
-          className="m-2 flex flex-col items-start justify-between w-[300px] h-[250px] video-card"
+          className="m-2 flex flex-col items-start justify-between  video-card"
         >
-          <div className="w-full h-2/3 overflow-hidden">
+          <div className="w-full h-full overflow-hidden">
             <VideoThumbnail videoUrl={video.url} />
           </div>
           <div className="p-2 h-1/3 w-full flex flex-col">

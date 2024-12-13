@@ -35,7 +35,7 @@ const VideoThumbnail = ({ videoUrl }) => {
   }, [videoUrl]);
 
   return (
-    <div className="thumbnail">
+    <div className=" thumbnail">
       <div className="video-compact-container hidden">
         <video ref={videoRef} src={videoUrl} autoPlay loop muted />
       </div>
@@ -46,7 +46,11 @@ const VideoThumbnail = ({ videoUrl }) => {
         style={{ display: "none" }}
       />
       {thumbnail && (
-        <img className="rounded-lg" src={thumbnail} alt="Video Thumbnail" />
+        <img
+          className=" w-full h-full rounded-lg"
+          src={thumbnail}
+          alt="Video Thumbnail"
+        />
       )}
     </div>
   );
