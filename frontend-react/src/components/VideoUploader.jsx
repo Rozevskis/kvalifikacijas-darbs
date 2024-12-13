@@ -46,12 +46,11 @@ const VideoUploader = ({ onUploadComplete, uploading, setUploading }) => {
       setUploadedVideoUrl(videoUrl);
       setFilePreview(videoUrl); // Show the uploaded video
       onUploadComplete(videoUrl); // Pass the URL back to the parent component
+      setUploading(false);
       return true;
     } catch (error) {
       setErrorMessage("Failed to upload video. Please try again.");
       return false;
-    } finally {
-      setUploading(false);
     }
   }
 
@@ -70,47 +69,59 @@ const VideoUploader = ({ onUploadComplete, uploading, setUploading }) => {
   };
 
   return (
-    <div className="max-w-[900px] h-[600px] mx-auto">
-      <label
-        htmlFor="file-upload"
-        id="file-drag"
-        onDragOver={handleDragOver}
-        onDrop={handleDrop}
-        className={`group flex flex-col justify-center items-center w-full h-full p-8 text-center bg-slate-50 hover:bg-slate-200 hover:border-0 rounded-lg ${
-          !filePreview ? "border-2 border-gray-300" : ""
-        } transition-all duration-200 cursor-pointer select-none`}
+    <>
+      {!filePreview && (
+        <div className="bg-slate-900 absolute w-full h-full top-0 left-0 opacity-50" />
+      )}
+      <div
+        className={`w-[900px] h-[600px] mx-auto ${
+          !filePreview && "absolute z-10 top-10 left-[50%] translate-x-[-50%]"
+        }`}
       >
-        {filePreview ? (
-          <VideoPlayer videoSrc={uploadedVideoUrl || filePreview} />
-        ) : (
-          <div id="start" className="flex flex-col items-center">
-            <i
-              id="upload-icon"
-              className="fa fa-download text-5xl mb-4 group-hover:text-7xl group-hover:text-slate-600 "
-              aria-hidden="true"
-            ></i>
-            <p className="text-blue-300 text-sm group-hover:hidden">
-              ~ 200MB max
-            </p>
-            <div className="text-gray-600 group-hover:hidden">
-              Select a file or drag here
+        <label
+          htmlFor="file-upload"
+          id="file-drag"
+          onDragOver={handleDragOver}
+          onDrop={handleDrop}
+          className={`group flex flex-col justify-center items-center w-full h-full p-8 text-center  hover:border-0 rounded-lg ${
+            !filePreview
+              ? "border-2 border-gray-300 bg-slate-50 hover:bg-slate-200"
+              : ""
+          } transition-all duration-200 cursor-pointer select-none`}
+        >
+          {filePreview ? (
+            <VideoPlayer videoSrc={uploadedVideoUrl || filePreview} />
+          ) : (
+            <div id="start" className="flex flex-col items-center">
+              <i
+                id="upload-icon"
+                className="fa fa-download text-5xl mb-4 group-hover:text-7xl group-hover:text-slate-600 "
+                aria-hidden="true"
+              ></i>
+              <p className="text-blue-300 text-sm group-hover:hidden">
+                ~ 200MB max
+              </p>
+              <div className="text-gray-600 group-hover:hidden">
+                Select a file or drag here
+              </div>
+              {errorMessage && (
+                <div className="text-red-500 font-bold mt-2">
+                  {errorMessage}
+                </div>
+              )}
             </div>
-            {errorMessage && (
-              <div className="text-red-500 font-bold mt-2">{errorMessage}</div>
-            )}
-          </div>
-        )}
-      </label>
-
-      <input
-        id="file-upload"
-        type="file"
-        accept="video/*"
-        onChange={handleFileChange}
-        ref={fileInputRef}
-        className="hidden"
-      />
-    </div>
+          )}
+        </label>
+        <input
+          id="file-upload"
+          type="file"
+          accept="video/*"
+          onChange={handleFileChange}
+          ref={fileInputRef}
+          className="hidden"
+        />
+      </div>
+    </>
   );
 };
 

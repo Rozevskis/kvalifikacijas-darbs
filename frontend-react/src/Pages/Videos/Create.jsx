@@ -39,8 +39,7 @@ export default function Create() {
 
   return (
     <>
-      <h1 className="title">Upload a new video</h1>
-      <div className="">
+      <div className="m-4">
         <VideoUploader
           onUploadComplete={handleVideoUploadComplete}
           uploading={uploading}
