@@ -17,19 +17,19 @@ const VideoUploader = ({ onUploadComplete }) => {
     }
   };
 
-  const processFile = (file) => {
+  const processFile = async (file) => {
     const isValid = /\.(mp4|avi|mkv)$/i.test(file.name);
     if (isValid) {
-      setFilePreview(URL.createObjectURL(file));
       setErrorMessage(null);
-      uploadFile(file); // Start uploading the file
+      const success = await uploadFile(file); // Start uploading the file
+      if (success) setFilePreview(URL.createObjectURL(file));
     } else {
       setFilePreview(null);
       setErrorMessage("Please select a valid video file (mp4, avi, mkv).");
     }
   };
 
-  const uploadFile = async (file) => {
+  async function uploadFile(file) {
     const formData = new FormData();
     formData.append("file", file);
 
@@ -50,12 +50,11 @@ const VideoUploader = ({ onUploadComplete }) => {
       setFilePreview(videoUrl); // Show the uploaded video
       onUploadComplete(videoUrl); // Pass the URL back to the parent component
     } catch (error) {
-      console.error("Upload failed:", error);
       setErrorMessage("Failed to upload video. Please try again.");
     } finally {
       setUploading(false);
     }
-  };
+  }
 
   const handleDragOver = (e) => {
     e.preventDefault();
@@ -87,7 +86,9 @@ const VideoUploader = ({ onUploadComplete }) => {
             <i className="fa fa-download" aria-hidden="true"></i>
             <p className="text-blue-300 text-sm">~ 200MB max</p>
             <div>Select a file or drag here</div>
-            {errorMessage && <div id="notimage">{errorMessage}</div>}
+            {errorMessage && (
+              <div className="text-red-500 font-bold">{errorMessage}</div>
+            )}
             {uploading ? (
               <div>Uploading...</div>
             ) : (
