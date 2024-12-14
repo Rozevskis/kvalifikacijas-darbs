@@ -1,8 +1,15 @@
 import { Link } from "react-router-dom";
 import VideoThumbnail from "./VideoThumbnail";
 import TimeAgo from "./timeAgo";
+import { useContext } from "react";
+import { AppContext } from "../Context/AppContext";
+
+// icons
+import { HiOutlineDotsVertical } from "react-icons/hi";
 
 export default function VideoCard({ video }) {
+  const { user } = useContext(AppContext);
+
   return (
     <div className="max-h-min w-[25%] min-w-[300px]">
       <Link to={`/videos/${video.id}`}>
@@ -15,7 +22,13 @@ export default function VideoCard({ video }) {
             <div className="h-full animate-pulse z-[-3] bg-slate-700 " />
           </div>
           <div className="p-2 h-1/3 w-full flex flex-col">
-            <h2 className="font-bold">{video.title}</h2>
+            <div className="flex justify-between">
+              <h2 className="font-bold">{video.title}</h2>
+              {user?.id == video.user_id && (
+                <HiOutlineDotsVertical className="text-[20px]" />
+              )}
+              {/* <HiOutlineDotsVertical className="text-[20px]" /> */}
+            </div>
             <div className="flex items-end w-full justify-between">
               <small className="font-semibold">{video.user.name}</small>
               <TimeAgo createdAt={video.created_at} />
