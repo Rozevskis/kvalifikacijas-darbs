@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import axios from "axios";
 import { VideoPlayer } from "./VideoPlayer";
 import "./VideoUploader.css";
+import { useNavigate } from "react-router-dom";
 const VideoUploader = ({ onUploadComplete, uploading, setUploading }) => {
   const [filePreview, setFilePreview] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -14,6 +15,8 @@ const VideoUploader = ({ onUploadComplete, uploading, setUploading }) => {
       processFile(file);
     }
   };
+
+  const navigate = useNavigate();
 
   const processFile = async (file) => {
     const isValid = /\.(mp4|avi|mkv)$/i.test(file.name);
@@ -120,6 +123,12 @@ const VideoUploader = ({ onUploadComplete, uploading, setUploading }) => {
           ref={fileInputRef}
           className="hidden"
         />
+        <a
+          onClick={() => navigate("/")}
+          className="mt-3 text-xl cursor-pointer"
+        >
+          Cancel
+        </a>
       </div>
     </>
   );
