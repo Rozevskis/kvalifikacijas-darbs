@@ -1,10 +1,14 @@
 import React, { useRef, useState } from "react";
 import axios from "axios";
 import { VideoPlayer } from "./VideoPlayer";
-import "./VideoUploader.css";
 import { useNavigate } from "react-router-dom";
-const VideoUploader = ({ onUploadComplete, uploading, setUploading }) => {
-  const [filePreview, setFilePreview] = useState(null);
+const VideoUploader = ({
+  onUploadComplete,
+  uploading,
+  setUploading,
+  filePreview,
+  setFilePreview,
+}) => {
   const [errorMessage, setErrorMessage] = useState(null);
   const fileInputRef = useRef(null);
   const [uploadedVideoUrl, setUploadedVideoUrl] = useState(null);
@@ -77,8 +81,9 @@ const VideoUploader = ({ onUploadComplete, uploading, setUploading }) => {
         <div className="bg-slate-900 absolute w-full h-full top-0 left-0 opacity-50" />
       )}
       <div
-        className={`w-[900px] h-[600px] mx-auto ${
-          !filePreview && "absolute z-10 top-10 left-[50%] translate-x-[-50%]"
+        className={`w-[900px]  mx-auto ${
+          !filePreview &&
+          "h-[600px] absolute z-10 top-10 left-[50%] translate-x-[-50%]"
         }`}
       >
         <label
@@ -86,7 +91,7 @@ const VideoUploader = ({ onUploadComplete, uploading, setUploading }) => {
           id="file-drag"
           onDragOver={handleDragOver}
           onDrop={handleDrop}
-          className={`group flex flex-col justify-center items-center w-full h-full p-8 text-center  hover:border-0 rounded-lg ${
+          className={`group flex flex-col justify-center items-center w-full h-full text-center  hover:border-0 rounded-lg ${
             !filePreview
               ? "border-2 border-gray-300 bg-slate-50 hover:bg-slate-200"
               : ""
@@ -123,12 +128,14 @@ const VideoUploader = ({ onUploadComplete, uploading, setUploading }) => {
           ref={fileInputRef}
           className="hidden"
         />
-        <a
-          onClick={() => navigate("/")}
-          className="mt-3 text-xl cursor-pointer"
-        >
-          Cancel
-        </a>
+        {!filePreview && (
+          <a
+            onClick={() => navigate("/")}
+            className="relative top-3 text-xl cursor-pointer"
+          >
+            Cancel
+          </a>
+        )}
       </div>
     </>
   );

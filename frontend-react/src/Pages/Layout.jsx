@@ -30,7 +30,7 @@ export default function Layout() {
             Home
           </Link>
 
-          <div className="w-1/4 rounded-3xl bg-slate-600 text-neutral-400 flex  ">
+          <div className="w-1/4 rounded-3xl bg-slate-600 text-neutral-400 flex shadow-inner  ">
             <input
               type="text"
               id="video-search"
