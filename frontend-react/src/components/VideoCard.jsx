@@ -27,7 +27,6 @@ export default function VideoCard({ video }) {
               {user?.id == video.user_id && (
                 <HiOutlineDotsVertical className="text-[20px]" />
               )}
-              {/* <HiOutlineDotsVertical className="text-[20px]" /> */}
             </div>
             <div className="flex items-end w-full justify-between">
               <small className="font-semibold">{video.user.name}</small>
