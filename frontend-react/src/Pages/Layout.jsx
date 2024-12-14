@@ -30,17 +30,8 @@ export default function Layout() {
             Home
           </Link>
 
-          <div className="w-1/4 rounded-3xl bg-slate-600 text-neutral-400 flex shadow-inner  ">
-            <input
-              type="text"
-              id="video-search"
-              className="w-[90%] px-4 py-2 rounded-3xl bg-slate-600 text-neutral-400 "
-              placeholder="Search will be here..."
-            />
-            <div className="w-[10%] h-auto flex items-center justify-center">
-              <IoSearchSharp />
-            </div>
-          </div>
+          <VideoSearch />
+
           {user ? (
             // Authenticated
             <div className="space-x-4 flex items-center">
@@ -73,5 +64,21 @@ export default function Layout() {
         <Outlet />
       </main>
     </>
+  );
+}
+
+function VideoSearch() {
+  return (
+    <div className="w-1/4 rounded-3xl bg-slate-600 text-neutral-400 flex shadow-inner  ">
+      <input
+        type="text"
+        id="video-search"
+        className="w-[90%] px-4 py-2 rounded-3xl bg-slate-600 text-neutral-400 "
+        placeholder="Search will be here..."
+      />
+      <div className="w-[10%] h-auto flex items-center justify-center">
+        <IoSearchSharp />
+      </div>
+    </div>
   );
 }
