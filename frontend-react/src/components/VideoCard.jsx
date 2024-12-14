@@ -10,8 +10,9 @@ export default function VideoCard({ video }) {
           key={video.id}
           className="m-2 flex flex-col items-start justify-between  video-card"
         >
-          <div className="w-full h-full overflow-hidden">
+          <div className="w-full aspect-video  overflow-hidden">
             <VideoThumbnail videoUrl={video.url} />
+            <div className="h-full animate-pulse z-[-3] bg-slate-700 " />
           </div>
           <div className="p-2 h-1/3 w-full flex flex-col">
             <h2 className="font-bold">{video.title}</h2>
