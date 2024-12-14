@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import { Link, Navigate, Outlet } from "react-router-dom";
 import { AppContext } from "../Context/AppContext";
+// icons
+import { IoSearchSharp } from "react-icons/io5";
 
 export default function Layout() {
   const { user, token, setUser, setToken } = useContext(AppContext);
@@ -23,10 +25,22 @@ export default function Layout() {
   return (
     <>
       <header>
-        <nav className="dark:bg-slate-900">
+        <nav className="dark:bg-slate-900 shadow-2xl">
           <Link to="/" className=" text-white py-2 px-4 font-semibold ">
             Home
           </Link>
+
+          <div className="w-1/4 rounded-3xl bg-slate-600 text-neutral-400 flex  ">
+            <input
+              type="text"
+              id="video-search"
+              className="w-[90%] px-4 py-2 rounded-3xl bg-slate-600 text-neutral-400 "
+              placeholder="Search will be here..."
+            />
+            <div className="w-[10%] h-auto flex items-center justify-center">
+              <IoSearchSharp />
+            </div>
+          </div>
           {user ? (
             // Authenticated
             <div className="space-x-4 flex items-center">
