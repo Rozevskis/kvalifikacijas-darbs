@@ -8,6 +8,7 @@ import { useContext } from "react";
 import { AppContext } from "./Context/AppContext";
 import Create from "./Pages/Videos/Create";
 import Show from "./Pages/Videos/Show";
+import Edit from "./Pages/Videos/Edit";
 
 export default function App() {
   const { user } = useContext(AppContext);
@@ -25,6 +26,7 @@ export default function App() {
 
           {/* Video */}
           <Route path="/videos/:id" element={<Show />} />
+          <Route path="/videos/:id/edit" element={user ? <Home /> : <Edit />} />
         </Route>
       </Routes>
     </BrowserRouter>

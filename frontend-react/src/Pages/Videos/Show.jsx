@@ -5,6 +5,7 @@ import VideoList from "../../components/Blocks/VideoList";
 import { useContext } from "react";
 import { AppContext } from "../../Context/AppContext";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // icons
 import { HiOutlineDotsVertical } from "react-icons/hi";
@@ -76,7 +77,9 @@ export default function Show() {
                         >
                           Delete
                         </a>
-                        <a className=" cursor-pointer">Edit</a>
+                        <Link to={`/videos/${video.id}/edit`}>
+                          <a className=" cursor-pointer">Edit</a>
+                        </Link>
                         {/* <a >History</a> */}
                       </div>
                     </div>
