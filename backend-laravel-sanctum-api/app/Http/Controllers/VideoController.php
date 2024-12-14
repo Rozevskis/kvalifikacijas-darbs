@@ -72,18 +72,34 @@ class VideoController extends Controller implements HasMiddleware
         $request->validate([
             'file' => 'required|file|mimes:mp4,m4v,avi,mkv|max:204800',
         ]);
-
+    
         $file = $request->file('file');
-
+    
         $destinationPath = base_path('../frontend-react/public/videos');
         if (!File::exists($destinationPath)) {
             File::makeDirectory($destinationPath, 0777, true, true);
         }
-
-        $filename = $file->getClientOriginalName();
+    
+        // Get original filename
+        $originalFilename = $file->getClientOriginalName();
+    
+        // Check if a file with the same name exists
+        $filename = $originalFilename;
+        $counter = 1;
+        while (File::exists($destinationPath . '/' . $filename)) {
+            // Append a number to the filename (e.g., video(1).mp4)
+            $filename = pathinfo($originalFilename, PATHINFO_FILENAME) 
+                        . "({$counter})." 
+                        . $file->getClientOriginalExtension();
+            $counter++;
+        }
+    
+        // Move the file
         $file->move($destinationPath, $filename);
-
+    
+        // Return the public URL
         $publicUrl = "/videos/{$filename}";
         return response()->json(['url' => $publicUrl], 200);
     }
+    
 }
