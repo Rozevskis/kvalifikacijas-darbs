@@ -29,7 +29,7 @@ export default function Show() {
               </div>
               <div className="flex flex-col gap-2 m-4">
                 <p className="text-xl font-bold">{video.title}</p>
-                <div className="p-4 rounded-xl bg-slate-300">
+                <div className="p-4 rounded-xl bg-slate-300 text-black dark:bg-neutral-800 dark:text-neutral-100">
                   <p>{video.description}</p>
                   <small>{video.url}</small>
                   <div className="flex justify-end w-full gap-3">
