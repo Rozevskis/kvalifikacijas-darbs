@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
 
 export default function Register() {
-  const {setToken } = useContext(AppContext);
+  const { setToken } = useContext(AppContext);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
@@ -32,14 +32,15 @@ export default function Register() {
   }
 
   return (
-    <div>
-      <h1 className="title">Register</h1>
-      <form onSubmit={handleRegister} className="w-1/2 space-y-4 mx-auto ">
+    <div className="max-w-[600px] mx-auto ">
+      <h1 className="title dark:text-neutral-100 mt-10">Register</h1>
+      <form onSubmit={handleRegister} className="w-2/3 space-y-4 mx-auto ">
         <div>
           <input
             type="text"
             placeholder="Name"
             value={formData.name}
+            className="mt-6 w-full p-2 rounded text-black bg-slate-200 dark:text-slate-100 dark:bg-slate-700"
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
           />
           {errors.name && <p className="error">{errors.name}</p>}
@@ -49,6 +50,7 @@ export default function Register() {
             type="email"
             placeholder="Email"
             value={formData.email}
+            className=" w-full p-2 rounded text-black bg-slate-200 dark:text-slate-100 dark:bg-slate-700"
             onChange={(e) =>
               setFormData({ ...formData, email: e.target.value })
             }
@@ -60,6 +62,7 @@ export default function Register() {
             type="password"
             placeholder="Password"
             value={formData.password}
+            className=" w-full p-2 rounded text-black bg-slate-200 dark:text-slate-100 dark:bg-slate-700"
             onChange={(e) =>
               setFormData({ ...formData, password: e.target.value })
             }
@@ -71,6 +74,7 @@ export default function Register() {
             type="password"
             placeholder="Password confirmation"
             value={formData.password_confirmation}
+            className=" w-full p-2 rounded text-black bg-slate-200 dark:text-slate-100 dark:bg-slate-700"
             onChange={(e) =>
               setFormData({
                 ...formData,

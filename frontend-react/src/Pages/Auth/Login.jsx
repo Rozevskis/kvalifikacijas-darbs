@@ -30,14 +30,15 @@ export default function Login() {
   }
 
   return (
-    <div>
-      <h1 className="title">Login</h1>
-      <form onSubmit={handleLogin} className="w-1/2 space-y-4 mx-auto ">
+    <div className="max-w-[600px] mx-auto ">
+      <h1 className="title dark:text-neutral-100 mt-10">Login</h1>
+      <form onSubmit={handleLogin} className="w-2/3 space-y-4 mx-auto ">
         <div>
           <input
             type="email"
             placeholder="Email"
             value={formData.email}
+            className="mt-6 w-full p-2 rounded text-black bg-slate-200 dark:text-slate-100 dark:bg-slate-700"
             onChange={(e) =>
               setFormData({ ...formData, email: e.target.value })
             }
@@ -49,6 +50,7 @@ export default function Login() {
             type="password"
             placeholder="Password"
             value={formData.password}
+            className=" w-full p-2 rounded text-black bg-slate-200 dark:text-slate-100 dark:bg-slate-700"
             onChange={(e) =>
               setFormData({ ...formData, password: e.target.value })
             }
