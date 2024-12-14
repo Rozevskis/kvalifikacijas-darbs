@@ -63,43 +63,51 @@ class VideoController extends Controller implements HasMiddleware
         if ($request->user()->id !== $video->user_id) {
             return response()->json(['error' => 'Unauthorized'], 403);
         }
-        $video->delete();
 
-        return response()->json(null, 204);
+        $destinationPath = base_path('../frontend-react/public');
+        $filename = $video->url;
+        $filePath = $destinationPath . '/' . $filename;
+
+        if (File::exists($filePath)) {
+            File::delete($filePath);
+            $video->delete();
+            return response()->json(['message' => 'Video deleted successfully'], 200);
+        } else {
+            return response()->json(['error' => 'File not found'], 404);
+        }
     }
     public function uploadVideo(Request $request)
     {
         $request->validate([
             'file' => 'required|file|mimes:mp4,m4v,avi,mkv|max:204800',
         ]);
-    
+
         $file = $request->file('file');
-    
+
         $destinationPath = base_path('../frontend-react/public/videos');
         if (!File::exists($destinationPath)) {
             File::makeDirectory($destinationPath, 0777, true, true);
         }
-    
+
         // Get original filename
         $originalFilename = $file->getClientOriginalName();
-    
+
         // Check if a file with the same name exists
         $filename = $originalFilename;
         $counter = 1;
         while (File::exists($destinationPath . '/' . $filename)) {
             // Append a number to the filename (e.g., video(1).mp4)
-            $filename = pathinfo($originalFilename, PATHINFO_FILENAME) 
-                        . "({$counter})." 
-                        . $file->getClientOriginalExtension();
+            $filename = pathinfo($originalFilename, PATHINFO_FILENAME)
+                . "({$counter})."
+                . $file->getClientOriginalExtension();
             $counter++;
         }
-    
+
         // Move the file
         $file->move($destinationPath, $filename);
-    
+
         // Return the public URL
         $publicUrl = "/videos/{$filename}";
         return response()->json(['url' => $publicUrl], 200);
     }
-    
 }
