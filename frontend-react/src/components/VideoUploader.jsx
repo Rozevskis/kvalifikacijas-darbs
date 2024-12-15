@@ -23,14 +23,14 @@ const VideoUploader = ({
   const navigate = useNavigate();
 
   const processFile = async (file) => {
-    const isValid = /\.(mp4|avi|mkv)$/i.test(file.name);
+    const isValid = /\.(mp4|mkv)$/i.test(file.name);
     if (isValid) {
       setErrorMessage(null);
       const success = await uploadFile(file); // Start uploading the file
       if (success) setFilePreview(URL.createObjectURL(file));
     } else {
       setFilePreview(null);
-      setErrorMessage("Please select a valid video file (mp4, avi, mkv).");
+      setErrorMessage("Please select a valid video file (mp4, mkv).");
     }
   };
 
