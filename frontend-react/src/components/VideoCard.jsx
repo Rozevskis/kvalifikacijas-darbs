@@ -7,11 +7,15 @@ import { AppContext } from "../Context/AppContext";
 // icons
 import { HiOutlineDotsVertical } from "react-icons/hi";
 
-export default function VideoCard({ video }) {
+export default function VideoCard({ video, col }) {
   const { user } = useContext(AppContext);
 
   return (
-    <div className="max-h-min w-[50%] md:w-[33%] xl:w-[25%] 2xl:w-[20%]">
+    <div
+      className={`max-h-min ${
+        col ? "w-full" : "w-[50%] md:w-[33%] xl:w-[25%] 2xl:w-[20%]  "
+      }`}
+    >
       <Link to={`/videos/${video.id}`}>
         <div
           key={video.id}

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import VideoCard from "../VideoCard";
 
-const VideoList = ({ currentVideoUrl }) => {
+const VideoList = ({ currentVideoUrl, col }) => {
   const [videos, setVideos] = useState([]);
 
   async function getVideos() {
@@ -17,7 +17,11 @@ const VideoList = ({ currentVideoUrl }) => {
   }, []);
 
   return (
-    <div className="flex flex-row w-full m-6 flex-wrap content-start shadow-inner">
+    <div
+      className={`flex ${
+        currentVideoUrl && "flex-col"
+      } w-full m-6 flex-wrap content-start shadow-inner`}
+    >
       {videos.length > 0 ? (
         videos.map((video) => {
           // Check if video.url is not equal to currentVideoUrl
