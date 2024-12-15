@@ -20,6 +20,12 @@ export default function Show() {
     const res = await fetch(`/api/videos/${id}`);
     const data = await res.json();
     setVideo(data);
+
+    if (data.isPrivate && user?.id !== data.user_id) {
+      navigate("/"); // Redirect to home if the video is private and not owned by the current user
+      return;
+    }
+    
     if (res.ok) {
       console.log(data);
     }
