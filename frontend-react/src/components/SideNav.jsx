@@ -1,7 +1,7 @@
 export default function SideNav() {
   return (
     <>
-      <div className="h-screen w-[300px] bg-slate-900 dark:bg-neutral-900  p-[30px] flex flex-col shadow-lg">
+      <div className="hidden h-screen w-[300px] bg-slate-900 dark:bg-neutral-900  p-[30px] lg:flex flex-col shadow-lg">
         <NavItem name="New" />
         <NavItem name="Features" />
         <NavItem name="Here" />

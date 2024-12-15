@@ -11,7 +11,7 @@ export default function VideoCard({ video }) {
   const { user } = useContext(AppContext);
 
   return (
-    <div className="max-h-min w-[25%] min-w-[300px]">
+    <div className="max-h-min w-[50%] md:w-[33%] xl:w-[25%] 2xl:w-[20%]">
       <Link to={`/videos/${video.id}`}>
         <div
           key={video.id}
