@@ -5,6 +5,10 @@ import VideoUploader from "../../components/VideoUploader";
 
 import SideNav from "../../components/SideNav";
 
+// icons
+import { FaGlobe } from "react-icons/fa";
+import { GoPersonFill } from "react-icons/go";
+
 export default function Create() {
   const navigate = useNavigate();
   const { token } = useContext(AppContext);
@@ -14,6 +18,7 @@ export default function Create() {
     title: "",
     description: "",
     url: "",
+    isPrivate: false,
   });
   const [errors, setErrors] = useState({});
 
@@ -42,8 +47,8 @@ export default function Create() {
 
   return (
     <>
-      <div className="w-[1200px] mt-5 mx-auto flex flex-row items-start h-[900px]">
-        <div className="w-[900px]">
+      <form onSubmit={handleCreate} className="">
+        <div className="w-[1200px] mt-5 mx-auto flex flex-row items-start h-[900px]">
           <div className="w-fit ">
             <VideoUploader
               onUploadComplete={handleVideoUploadComplete}
@@ -52,9 +57,8 @@ export default function Create() {
               filePreview={filePreview}
               setFilePreview={setFilePreview}
             />
-          </div>
-          {filePreview && (
-            <form onSubmit={handleCreate} className="">
+            <div className="w-[900px]"></div>
+            {filePreview && (
               <div>
                 <input
                   type="text"
@@ -66,8 +70,6 @@ export default function Create() {
                   }
                 />
                 {errors.title && <p className="text-red-500">{errors.title}</p>}
-              </div>
-              <div>
                 <textarea
                   rows="10"
                   style={{ resize: "none" }}
@@ -81,23 +83,57 @@ export default function Create() {
                 {errors.description && (
                   <p className="text-red-500">{errors.description}</p>
                 )}
+                <button className="primary-btn w-56 mt-5">Post</button>
               </div>
-              <button className="primary-btn w-56 mt-5">Post</button>
-            </form>
+            )}
+          </div>
+          {filePreview && (
+            <VideoDetails
+              isPrivate={formData.isPrivate}
+              setFormData={setFormData}
+            />
           )}
         </div>
-        {filePreview && <VideoDetails />}
-      </div>
+      </form>
     </>
   );
 }
 
-function VideoDetails({}) {
+function VideoDetails({ isPrivate, setFormData }) {
   return (
     <>
       <div className="h-full w-[300px] bg-slate-900 dark:bg-neutral-900  px-8 py-4 flex flex-col shadow-lg">
         Video details
         <hr />
+        <div className="mt-4">
+          <p>Video Privacy</p>
+          <label className=" text-slate-100 space-x-2 flex items-center">
+            <FaGlobe />
+            <input
+              type="radio"
+              name="privacy"
+              value="false"
+              checked={!isPrivate}
+              onChange={() =>
+                setFormData((prev) => ({ ...prev, isPrivate: false }))
+              }
+            />
+            <p>Public</p>
+          </label>
+          <label className=" mt-2 text-slate-100 space-x-2 flex items-center">
+            <GoPersonFill />
+            <input
+              type="radio"
+              name="privacy"
+              value="true"
+              checked={isPrivate}
+              onChange={() =>
+                setFormData((prev) => ({ ...prev, isPrivate: true }))
+              }
+            />
+            <p>Private</p>
+          </label>
+        </div>
       </div>
     </>
   );

@@ -26,7 +26,7 @@ export default function App() {
 
           {/* Video */}
           <Route path="/videos/:id" element={<Show />} />
-          <Route path="/videos/:id/edit" element={user ? <Home /> : <Edit />} />
+          <Route path="/videos/:id/edit" element={user ? <Edit /> : <Home />} />
         </Route>
       </Routes>
     </BrowserRouter>

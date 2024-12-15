@@ -5,6 +5,10 @@ import { VideoPlayer } from "../../components/VideoPlayer";
 
 import SideNav from "../../components/SideNav";
 
+// icons
+import { FaGlobe } from "react-icons/fa";
+import { GoPersonFill } from "react-icons/go";
+
 export default function Edit() {
   const navigate = useNavigate();
   const { user, token } = useContext(AppContext);
@@ -15,6 +19,7 @@ export default function Edit() {
     title: "",
     description: "",
     url: "",
+    isPrivate: false,
   });
 
   async function getVideo() {
@@ -25,6 +30,7 @@ export default function Edit() {
       setFormData({
         title: data.title || "",
         description: data.description || "",
+        isPrivate: data.isPrivate || false,
       });
     }
   }
@@ -56,12 +62,12 @@ export default function Edit() {
 
   return (
     <>
-      <div className="w-[1200px] mt-5 mx-auto flex flex-row items-start h-[900px]">
-        <div className="w-[900px]">
-          <div className="w-fit ">{/* VIDEO */}</div>
+      <form onSubmit={handleUpdate} className="">
+        <div className="w-[1200px] mt-5 mx-auto flex flex-row items-start h-[900px]">
+          <div className="w-[900px]">
+            <div className="w-fit ">{/* VIDEO */}</div>
 
-          <VideoPlayer videoSrc={video?.url} />
-          <form onSubmit={handleUpdate} className="">
+            <VideoPlayer videoSrc={video?.url} />
             <div>
               <input
                 type="text"
@@ -90,20 +96,53 @@ export default function Edit() {
               )}
             </div>
             <button className="primary-btn w-56 mt-5">Update</button>
-          </form>
+          </div>
+          <VideoDetails
+            isPrivate={formData.isPrivate}
+            formData={formData}
+            setFormData={setFormData}
+          />
         </div>
-        <VideoDetails />
-      </div>
+      </form>
     </>
   );
 }
 
-function VideoDetails({}) {
+function VideoDetails({ isPrivate, formData, setFormData }) {
   return (
     <>
       <div className="h-full w-[300px] bg-slate-900 dark:bg-neutral-900  px-8 py-4 flex flex-col shadow-lg">
         Video details
         <hr />
+        <div className="mt-4">
+          <p>Video Privacy</p>
+          <label className=" text-slate-100 space-x-2 flex items-center">
+            <FaGlobe />
+            <input
+              type="radio"
+              name="privacy"
+              value="false"
+              checked={!formData.isPrivate}
+              onChange={() =>
+                setFormData((prev) => ({ ...prev, isPrivate: false }))
+              }
+            />
+            <p>Public</p>
+          </label>
+          <label className=" mt-2 text-slate-100 space-x-2 flex items-center">
+            <GoPersonFill />
+            <input
+              type="radio"
+              name="privacy"
+              value="true"
+              checked={formData.isPrivate}
+              onChange={() =>
+                setFormData((prev) => ({ ...prev, isPrivate: true }))
+              }
+            />
+            <p>Private</p>
+          </label>
+        </div>
       </div>
     </>
   );

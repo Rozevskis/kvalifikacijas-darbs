@@ -13,10 +13,11 @@ class VideoFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->sentence, // Fake video title
-            'description' => $this->faker->paragraph, // Fake description
-            'url' => $this->faker->url, // Fake video URL
-            'user_id' => User::factory(), // Creates and associates a user
+            'title' => $this->faker->sentence,
+            'description' => $this->faker->paragraph,
+            'url' => $this->faker->url,
+            'isPrivate' => false,
+            'user_id' => User::factory(),
         ];
     }
 }

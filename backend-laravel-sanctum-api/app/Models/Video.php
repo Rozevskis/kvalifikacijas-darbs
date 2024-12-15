@@ -10,7 +10,7 @@ class Video extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'url'];
+    protected $fillable = ['title', 'description', 'url', 'isPrivate'];
 
     // Specify the primary key type as a UUID
     protected $keyType = 'string';

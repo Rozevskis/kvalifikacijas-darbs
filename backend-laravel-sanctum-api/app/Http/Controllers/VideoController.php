@@ -27,8 +27,9 @@ class VideoController extends Controller implements HasMiddleware
         $fields = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            // 'url' => 'required|url',
-            'url' => '',
+            'url' => 'required',
+            'isPrivate' => 'required|boolean'
+
         ]);
 
         $video = $request->user()->videos()->create($fields);
@@ -51,6 +52,8 @@ class VideoController extends Controller implements HasMiddleware
             'title' => 'sometimes|required|string|max:255',
             'description' => 'sometimes|nullable|string',
             'url' => 'sometimes|required',
+            'isPrivate' => 'sometimes|boolean'
+
         ]);
 
         $video->update($fields);
