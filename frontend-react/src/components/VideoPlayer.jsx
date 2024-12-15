@@ -1,7 +1,6 @@
 import React from "react";
 
 export const VideoPlayer = ({ videoSrc }) => {
-  console.log(videoSrc);
   return (
     <div className="w-full aspect-video">
       {videoSrc && (
