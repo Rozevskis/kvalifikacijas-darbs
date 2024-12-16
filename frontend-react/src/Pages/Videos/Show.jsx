@@ -25,7 +25,7 @@ export default function Show() {
       navigate("/"); // Redirect to home if the video is private and not owned by the current user
       return;
     }
-    
+
     if (res.ok) {
       console.log(data);
     }
@@ -102,7 +102,7 @@ export default function Show() {
               </div>
             </div>
           </div>
-          <div className="w-1/5 items-end">
+          <div className="w-1/5 flex">
             <VideoList currentVideoUrl={video.url} />
           </div>
         </div>
